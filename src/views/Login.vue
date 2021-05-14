@@ -1,17 +1,10 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <div class="wrapper fadeInDown">
       <div id="formContent">
-        <!-- Tabs Titles -->
-
-        <!-- Icon -->
         <div class="fadeIn first">
           <h2>Ingreso</h2>
         </div>
-
-        <!-- Login Form -->
         <form>
           <input
             type="text"
@@ -19,13 +12,15 @@
             class="fadeIn second"
             name="login"
             placeholder="número de identificación"
+            v-model="ident"
           />
           <input
-            type="text"
+            type="date"
             id="password"
             class="fadeIn third"
             name="login"
             placeholder="año de expedición"
+            v-model="birth"
           />
           <input
             type="submit"
@@ -41,13 +36,33 @@
 
 <script>
 // @ is an alias to /src
+import { mapMutations } from "vuex";
+import { mapState } from "vuex";
 
 export default {
+  computed: {
+    ...mapState(["user"]),
+  },
   name: "Login",
   methods: {
-    onClick() {
-      this.$router.push({ path: "/" });
+    ...mapMutations([
+      "getUser", //also supports payload `this.nameOfMutation(amount)`
+    ]),
+    onClick(e) {
+      e.preventDefault();
+      const data = {
+        identityNumber: this.ident,
+        birthDate: this.birth,
+      };
+      this.$store.commit("getUser", data);
+      console.log(this.user, "222");
     },
+  },
+  data() {
+    return {
+      ident: String,
+      birth: String,
+    };
   },
 };
 </script>
