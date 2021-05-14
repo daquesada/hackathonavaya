@@ -27,8 +27,16 @@
             class="fadeIn fourth"
             value="Validar usuario"
             @click="onClick"
+            :disabled="loading"
           />
         </form>
+        <div
+          class="spinner-border text-primary center"
+          role="status"
+          v-if="loading"
+        >
+          <span class="sr-only"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -38,38 +46,47 @@
 // @ is an alias to /src
 import { mapMutations } from "vuex";
 import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "loading"]),
   },
   name: "Login",
   methods: {
-    ...mapMutations([
-      "getUser", //also supports payload `this.nameOfMutation(amount)`
-    ]),
+    ...mapMutations(["getUser"]),
+    ...mapActions(["getUserRequest"]),
     onClick(e) {
       e.preventDefault();
       const data = {
         identityNumber: this.ident,
         birthDate: this.birth,
       };
-      this.$store.commit("getUser", data);
-      console.log(this.user, "222");
+      this.getUserRequest(data);
+    },
+    verifyLocalStorage() {
+      if (localStorage.getItem("token")) {
+        this.$router.push({ path: "/" });
+      }
     },
   },
   data() {
     return {
-      ident: String,
-      birth: String,
+      ident: "",
+      birth: "",
     };
+  },
+  mounted() {
+    this.verifyLocalStorage();
+  },
+  updated() {
+    this.verifyLocalStorage();
   },
 };
 </script>
 
 <style scoped>
 /* BASIC */
-
 html {
   background-color: #56baed;
 }
@@ -116,7 +133,6 @@ h2 {
   width: 90%;
   max-width: 450px;
   position: relative;
-  padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;

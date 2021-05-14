@@ -6,21 +6,34 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: undefined,
+    loading: false,
   },
   mutations: {
     getUser(state, data) {
-      console.log(data);
+      state.user = data.data.user;
+      localStorage.setItem("token", data.data.token);
+    },
+    updateLoading(state, data) {
+      state.loading = data;
+    },
+  },
+  actions: {
+    getUserRequest({ commit }, data) {
+      commit("updateLoading", true);
       axios
         .post(
           "https://avaya-hackathon-server.herokuapp.com/api/v1/users/login/",
           data
         )
         .then((data) => {
-          state.user = data.data;
+          commit("getUser", data);
+          commit("updateLoading", false);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          commit("updateLoading", false);
+        });
     },
   },
-  actions: {},
   modules: {},
 });
