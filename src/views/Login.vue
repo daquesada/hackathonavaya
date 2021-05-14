@@ -1,17 +1,10 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <div class="wrapper fadeInDown">
       <div id="formContent">
-        <!-- Tabs Titles -->
-
-        <!-- Icon -->
         <div class="fadeIn first">
           <h2>Ingreso</h2>
         </div>
-
-        <!-- Login Form -->
         <form>
           <input
             type="text"
@@ -19,21 +12,31 @@
             class="fadeIn second"
             name="login"
             placeholder="número de identificación"
+            v-model="ident"
           />
           <input
-            type="text"
+            type="date"
             id="password"
             class="fadeIn third"
             name="login"
             placeholder="año de expedición"
+            v-model="birth"
           />
           <input
             type="submit"
             class="fadeIn fourth"
             value="Validar usuario"
             @click="onClick"
+            :disabled="loading"
           />
         </form>
+        <div
+          class="spinner-border text-primary center"
+          role="status"
+          v-if="loading"
+        >
+          <span class="sr-only"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -41,20 +44,49 @@
 
 <script>
 // @ is an alias to /src
+import { mapMutations } from "vuex";
+import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
+  computed: {
+    ...mapState(["user", "loading"]),
+  },
   name: "Login",
   methods: {
-    onClick() {
-      this.$router.push({ path: "/" });
+    ...mapMutations(["getUser"]),
+    ...mapActions(["getUserRequest"]),
+    onClick(e) {
+      e.preventDefault();
+      const data = {
+        identityNumber: this.ident,
+        birthDate: this.birth,
+      };
+      this.getUserRequest(data);
     },
+    verifyLocalStorage() {
+      if (localStorage.getItem("token")) {
+        this.$router.push({ path: "/" });
+      }
+    },
+  },
+  data() {
+    return {
+      ident: "",
+      birth: "",
+    };
+  },
+  mounted() {
+    this.verifyLocalStorage();
+  },
+  updated() {
+    this.verifyLocalStorage();
   },
 };
 </script>
 
 <style scoped>
 /* BASIC */
-
 html {
   background-color: #56baed;
 }
@@ -101,7 +133,6 @@ h2 {
   width: 90%;
   max-width: 450px;
   position: relative;
-  padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
