@@ -9,7 +9,7 @@
     </div>
     <div>
       <p>nombre: {{ data.data[0].name }}</p>
-      <p>role: {{ data.data[0].role }}</p>
+      <p>tipo de afiliación: {{ data.data[0].role }}</p>
     </div>
 
     <img
