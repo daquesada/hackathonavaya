@@ -12,7 +12,10 @@
       <p>role: {{ data.data[0].role }}</p>
     </div>
 
-    <img :src="data.data[0].picture" alt="picture" />
+    <img
+      src="https://image.slidesharecdn.com/ejemplodehistoriaclinica-141119114412-conversion-gate02/95/ejemplo-de-historia-clinica-1-638.jpg?cb=1418134049"
+      alt="picture"
+    />
   </div>
 </template>
 
