@@ -28,6 +28,7 @@
             value="Validar usuario"
             @click="onClick"
             :disabled="loading"
+            style="margin-top: 20px"
           />
         </form>
         <div
@@ -90,7 +91,6 @@ export default {
 html {
   background-color: #56baed;
 }
-
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
