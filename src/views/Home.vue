@@ -1,10 +1,8 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <Button text="Exámenes médicos" />
-    <Button text="Historia clínica" />
-    <Button text="Orden de apoyo" />
+    <Button text="Exámenes médicos" id="examenes-medicos" />
+    <Button text="Historia clínica" id="historia-clinica" />
+    <Button text="Orden de apoyo" id="orden-apoyo" />
   </div>
 </template>
 

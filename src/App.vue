@@ -50,9 +50,9 @@ body {
   margin: 0 auto;
   width: 100%;
   background: #fefefe;
-  /* padding: 10px; */
 }
 #app {
   min-height: 100vh;
+  overflow: hidden;
 }
 </style>
