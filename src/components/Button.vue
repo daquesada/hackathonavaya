@@ -1,13 +1,20 @@
 <template>
   <div>
-    <button>{{ text }}</button>
+    <button @click="onClick">{{ text }}</button>
   </div>
 </template>
 
 <script>
 export default {
+  name: "button",
   props: {
     text: String,
+    id: String,
+  },
+  methods: {
+    onClick() {
+      this.$router.push({ path: `/detalle/${this.id}` });
+    },
   },
 };
 </script>
@@ -37,5 +44,6 @@ button {
 button:hover {
   background: cornflowerblue;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
-  <div class="logo">
-    <img src="../assets/prescripcion.png" alt="logo" class="img" />
+  <div class="logo-container">
+    <h1>Centro de ayuda</h1>
+    <div class="logo">
+      <router-link to="/">
+        <img src="../assets/prescripcion.png" alt="logo" class="img" />
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -9,6 +14,11 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.logo-container {
+  text-align: center;
+  margin: 30px 0;
+  /* margin-bottom: 30px; */
+}
 .logo {
   display: flex;
   justify-content: center;
