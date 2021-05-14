@@ -33,7 +33,7 @@ div {
 }
 button {
   width: 100%;
-  background: #0275d8;
+  background: #56baed;
   color: #ffff;
   height: 100%;
   border-radius: 5px;
