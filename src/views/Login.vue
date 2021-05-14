@@ -66,7 +66,7 @@ export default {
     },
     verifyLocalStorage() {
       if (localStorage.getItem("token")) {
-        this.$router.push({ path: "/" });
+        this.$router.push({ path: "/home" });
       }
     },
   },

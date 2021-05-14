@@ -2,7 +2,7 @@
   <div class="logo-container">
     <h1>Centro de ayuda</h1>
     <div class="logo">
-      <router-link to="/">
+      <router-link to="/home">
         <img src="../assets/prescripcion.png" alt="logo" class="img" />
       </router-link>
     </div>
